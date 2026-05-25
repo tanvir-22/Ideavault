@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
@@ -28,10 +29,10 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow font-semibold"
             >
               <li>
-                <a>Home</a>
+                <Link href="/">Home</Link>
               </li>
               <li>
-                <a>Ideas</a>
+                <Link href="/ideas">Ideas</Link>
               </li>
               <li>
                 <a>Add Idea</a>
@@ -49,10 +50,10 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 font-semibold">
             <li>
-              <a>Home</a>
+              <Link href="/">Home</Link>
             </li>
             <li>
-              <a>Ideas</a>
+              <Link href="/ideas">Ideas</Link>
             </li>
             <li>
               <a>Add Idea</a>
@@ -66,8 +67,12 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end flex gap-3">
-          <button className="btn bg-[#1e293b]">Login</button>
-          <button className="btn bg-[#7357f5]">Sign Up</button>
+          <button className="btn bg-[#1e293b]">
+            <Link href="/login">Login</Link>
+          </button>
+          <button className="btn bg-[#7357f5]">
+            <Link href="/signup">Sign Up</Link>
+          </button>
         </div>
       </div>
     </div>

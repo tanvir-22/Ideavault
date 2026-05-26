@@ -28,7 +28,10 @@ const LoginPage = () => {
           }}
         >
           <Label className="text-white">Email</Label>
-          <Input placeholder="john@example.com" />
+          <Input
+            className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
+            placeholder="john@example.com"
+          />
           <FieldError />
         </TextField>
         <TextField
@@ -50,20 +53,24 @@ const LoginPage = () => {
           }}
         >
           <Label className="text-white">Password</Label>
-          <Input placeholder="Enter your password" />
+          <Input
+            className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
+            placeholder="Enter your password"
+          />
           <Description>
             Must be at least 8 characters with 1 uppercase and 1 number
           </Description>
           <FieldError />
         </TextField>
-       
-        <div className="flex gap-2">
-          <Button type="submit">
+
+        <div className="flex flex-col gap-2">
+          <Button className="w-full bg-[#7357F5]" type="submit">
             <Check />
-            Submit
+            Login
           </Button>
-          <Button type="reset" variant="secondary">
-            Reset
+          <Button className="w-full bg-[#7357F5]" type="submit">
+            <Check />
+            Login with Google
           </Button>
         </div>
       </Form>

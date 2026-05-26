@@ -35,13 +35,13 @@ const Navbar = () => {
                 <Link href="/ideas">Ideas</Link>
               </li>
               <li>
-                <a>Add Idea</a>
+                <Link href="/addidea">Add Idea</Link>
               </li>
               <li>
-                <a>My Ideas</a>
+                <Link href="/myidea">My Ideas</Link>
               </li>
               <li>
-                <a>My Interactions</a>
+                <Link href="/myinteractions">My Interactions</Link>
               </li>
             </ul>
           </div>
@@ -59,10 +59,10 @@ const Navbar = () => {
               <Link href="/addidea">Add Idea</Link>
             </li>
             <li>
-              <a>My Ideas</a>
+              <Link href="/myidea">My Ideas</Link>
             </li>
             <li>
-              <a>My Interactions</a>
+              <Link href="/myinteractions">My Interactions</Link>
             </li>
           </ul>
         </div>

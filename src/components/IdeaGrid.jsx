@@ -7,7 +7,7 @@ import { FaHandshake } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 const IdeaGrid = () => {
   return (
-    <div className="bg-[#0F172A]">
+    <div className="bg-[#0F172A] py-10">
       <div className="w-10/12 mx-auto py-20 ">
         <h1 className="text-4xl  text-center ">
           Everything You Need to Grow Your Ideas

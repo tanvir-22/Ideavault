@@ -230,7 +230,7 @@ const AddIdeaPage = () => {
                     >
                       <Label className="text-white/80">Problem Statement</Label>
                       <TextArea
-                        className="bg-white/10 border-white/20 text-white placeholder:text-white/30"
+                        className=" bg-white/10 border-white/20 text-white placeholder:text-white/30"
                         placeholder="What problem does your idea solve?"
                         variant="secondary"
                       />

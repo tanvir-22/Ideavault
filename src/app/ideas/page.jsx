@@ -3,7 +3,9 @@ import { Button, Dropdown } from "@heroui/react";
 import { Label, SearchField } from "@heroui/react";
 import { GoHeartFill } from "react-icons/go";
 import { LiaCommentSolid } from "react-icons/lia";
+import Link from "next/link";
 const IdeaPage = () => {
+  const id = 1;
   return (
     <div className="bg-[#0F172A] relative overflow-hidden min-h-screen">
       <div className="absolute top-[-80px] left-[-80px] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[120px]" />
@@ -101,7 +103,9 @@ const IdeaPage = () => {
               </div>
             </div>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
+              <Link className="btn btn-primary" href={`/ideas/${id}`}>
+                View Details
+              </Link>
             </div>
           </div>
         </div>
@@ -317,7 +321,9 @@ const IdeaPage = () => {
               are title and actions parts
             </p>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
+              <Link className="btn btn-primary" href={`/ideas/${id}`}>
+                View Details
+              </Link>
             </div>
           </div>
         </div>

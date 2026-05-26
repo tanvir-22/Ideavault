@@ -30,7 +30,9 @@ const SignupPage = () => {
           }}
         >
           <Label className="text-white">Email</Label>
-          <Input placeholder="john@example.com" />
+          <Input 
+          className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
+          placeholder="john@example.com" />
           <FieldError />
         </TextField>
         <TextField
@@ -52,7 +54,8 @@ const SignupPage = () => {
           }}
         >
           <Label className="text-white">Password</Label>
-          <Input placeholder="Enter your password" />
+          <Input className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
+           placeholder="Enter your password" />
           <Description>
             Must be at least 8 characters with 1 uppercase and 1 number
           </Description>
@@ -60,20 +63,24 @@ const SignupPage = () => {
         </TextField>
         <TextField isRequired minLength={8} name="username" type="text">
           <Label className="text-white">Username</Label>
-          <Input placeholder="Enter your username" />
+          <Input
+            className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
+            placeholder="Enter your username"
+          />
         </TextField>
         <TextField isRequired minLength={8} name="image" type="url">
           <Label className="text-white">Profile Image URL</Label>
-          <Input placeholder="Enter your profile image URL" />
+          <Input
+            className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
+            placeholder="Enter your profile image URL"
+          />
         </TextField>
         <div className="flex gap-2">
-          <Button type="submit">
+          <Button className="w-full bg-[#7357F5]" type="submit">
             <Check />
-            Submit
+         Sign Up
           </Button>
-          <Button type="reset" variant="secondary">
-            Reset
-          </Button>
+        
         </div>
       </Form>
     </div>

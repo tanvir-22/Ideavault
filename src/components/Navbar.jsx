@@ -56,7 +56,7 @@ const Navbar = () => {
               <Link href="/ideas">Ideas</Link>
             </li>
             <li>
-              <a>Add Idea</a>
+              <Link href="/addidea">Add Idea</Link>
             </li>
             <li>
               <a>My Ideas</a>

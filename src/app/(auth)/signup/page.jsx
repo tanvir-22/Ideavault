@@ -1,6 +1,6 @@
 "use client";
 import { Check } from "@gravity-ui/icons";
-
+import { authClient } from "../../../lib/auth-client";
 import {
   Button,
   Description,
@@ -10,14 +10,33 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
-
+import { redirect } from "next/navigation";
 const SignupPage = () => {
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const userData = Object.fromEntries(formData.entries());
+    const { data, error } = await authClient.signUp.email({
+      email: userData.email,
+      password: userData.password,
+      image: userData.image,
+      name: userData.username,
+    });
+    if (data) {
+      redirect('/')
+    } else {
+      console.log(error);
+    }
+  };
   return (
     <div className="bg-[#0F172A] h-[91vh]  flex flex-col justify-center  items-center">
       <h1 className="text-3xl font-bold text-white py-2">
         Join the Future of Innovation
       </h1>
-      <Form className="flex w-120 p-18  flex-col gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg ">
+      <Form
+        onSubmit={onSubmitHandler}
+        className="flex w-120 p-18  flex-col gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg "
+      >
         <TextField
           isRequired
           name="email"
@@ -30,9 +49,10 @@ const SignupPage = () => {
           }}
         >
           <Label className="text-white">Email</Label>
-          <Input 
-          className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
-          placeholder="john@example.com" />
+          <Input
+            className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
+            placeholder="john@example.com"
+          />
           <FieldError />
         </TextField>
         <TextField
@@ -54,8 +74,10 @@ const SignupPage = () => {
           }}
         >
           <Label className="text-white">Password</Label>
-          <Input className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
-           placeholder="Enter your password" />
+          <Input
+            className="bg-white/10 text-white placeholder:text-white/50 border-white/20"
+            placeholder="Enter your password"
+          />
           <Description>
             Must be at least 8 characters with 1 uppercase and 1 number
           </Description>
@@ -78,9 +100,8 @@ const SignupPage = () => {
         <div className="flex gap-2">
           <Button className="w-full bg-[#7357F5]" type="submit">
             <Check />
-         Sign Up
+            Sign Up
           </Button>
-        
         </div>
       </Form>
     </div>

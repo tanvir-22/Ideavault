@@ -87,7 +87,9 @@ const Detailspage = async ({ params }) => {
               </div>
               <span className="text-white">{userData.name}</span>
             </div>
-            <span className="text-white">{new Date(res.createdAt).toLocaleDateString()}</span>
+            <span className="text-white">
+              {new Date(res.updatedAt).toLocaleDateString()}
+            </span>
           </div>
           <div className="flex justify-around mt-8">
             <button className="btn bg-white/10 bg-backdrop-lg border-white/20 text-white">

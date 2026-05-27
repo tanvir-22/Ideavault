@@ -27,7 +27,7 @@ const AddIdeaPage = () => {
     const formData = new FormData(e.target);
     const postData = Object.fromEntries(formData.entries());
     postData.category = category;
-    postData.author = session?.user?.id;
+    postData.author = session?.session?.userId;
     postData.likes = [];
     postData.comments = [];
     const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/createpost`, {

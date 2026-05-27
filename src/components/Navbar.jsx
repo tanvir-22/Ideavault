@@ -1,7 +1,10 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import { authClient } from "../lib/auth-client";
 
 const Navbar = () => {
+  const { data: session, isPending, error } = authClient.useSession();
+
   return (
     <div className="bg-[#0F172A] ">
       <div className="navbar shadow-sm  w-11/12 mx-auto">
@@ -66,14 +69,59 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end flex gap-3">
-          <button className="btn bg-[#1e293b]">
-            <Link href="/login">Login</Link>
-          </button>
-          <button className="btn bg-[#7357f5]">
-            <Link href="/signup">Sign Up</Link>
-          </button>
-        </div>
+        {session?.user ? (
+          <div className="navbar-end ">
+            <p className="mr-2 font-semibold text-[#7357F5]">
+              Welcome {session?.user?.name}!
+            </p>
+            <div className="dropdown dropdown-end ">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src={session?.user?.image}
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex="-1"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <a className="justify-between">
+                    Update Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+
+                <li>
+                  <button
+                    onClick={async () => {
+                      await authClient.signOut();
+                    }}
+                    className="btn bg-red-600"
+                  >
+                    {" "}
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <div className="navbar-end flex gap-3">
+            <button className="btn bg-[#1e293b]">
+              <Link href="/login">Login</Link>
+            </button>
+            <button className="btn bg-[#7357f5]">
+              <Link href="/signup">Sign Up</Link>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

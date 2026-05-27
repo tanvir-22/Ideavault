@@ -1,6 +1,7 @@
 "use client";
 import { Check } from "@gravity-ui/icons";
-
+import { authClient } from "../../../lib/auth-client";
+import { FaGoogle } from "react-icons/fa";
 import {
   Button,
   Description,
@@ -10,12 +11,37 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import { redirect } from "next/navigation";
 
 const LoginPage = () => {
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const loginData = Object.fromEntries(formData.entries());
+    const { data, error } = await authClient.signIn.email({
+      email: loginData.email,
+      password: loginData.password,
+    });
+    if (data) {
+      redirect("/");
+    } else {
+      console.log(error);
+    }
+  };
+
+  const googleLoginHandler = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
   return (
     <div className="bg-[#0F172A] h-[91vh]  flex flex-col justify-center  items-center">
       <h1 className="text-3xl font-bold text-white py-2">Welcome Back</h1>
-      <Form className="flex w-120 p-18  flex-col gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg ">
+      <Form
+        onSubmit={loginHandler}
+        className="flex w-120 p-18  flex-col gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg "
+      >
         <TextField
           isRequired
           name="email"
@@ -68,8 +94,8 @@ const LoginPage = () => {
             <Check />
             Login
           </Button>
-          <Button className="w-full bg-[#7357F5]" type="submit">
-            <Check />
+          <Button onClick={googleLoginHandler} className="w-full bg-[#7357F5]">
+            <FaGoogle />
             Login with Google
           </Button>
         </div>

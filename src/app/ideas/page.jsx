@@ -4,8 +4,19 @@ import { Label, SearchField } from "@heroui/react";
 import { GoHeartFill } from "react-icons/go";
 import { LiaCommentSolid } from "react-icons/lia";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 const IdeaPage = () => {
-  const id = 1;
+
+  const [postData, setPostData] = useState([]);
+  useEffect(() => {
+    async function loadData() {
+      const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
+      const res = await req.json();
+      setPostData(res);
+    }
+    loadData();
+  }, []);
+  console.log(postData);
   return (
     <div className="bg-[#0F172A] relative overflow-hidden min-h-screen">
       <div className="absolute top-[-80px] left-[-80px] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[120px]" />
@@ -72,279 +83,54 @@ const IdeaPage = () => {
       </div>
 
       <div className="w-10/12 pt-10 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="flex gap-2 py-2">
-              <p className="text-lg">Category-</p>
-              <div className="badge badge-soft badge-primary">Primary</div>
-              <div className="badge badge-soft badge-accent">Accent</div>
-            </div>
-            <div className="flex justify-between py-3   gap-2">
-              <div className="flex items-center gap-1 border border-gray-300 rounded-md p-2">
-                <GoHeartFill className=" text-3xl text-primary" />
-                Likes
-                <span>113</span>
-              </div>
-              <div className="flex items-center gap-1 border border-gray-300 rounded-md p-2">
-                <LiaCommentSolid className=" text-3xl text-primary" />
-                Comments
-                <span>113</span>
-              </div>
-            </div>
-            <div className="card-actions justify-end">
-              <Link className="btn btn-primary" href={`/ideas/${id}`}>
-                View Details
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <Link className="btn btn-primary" href={`/ideas/${id}`}>
-                View Details
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Card Title</h2>
-            <p>
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        </div>
+        {
+          postData.map((data)=>{
+            return (
+              <>
+                <div
+                  key={data._id}
+                  className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg"
+                >
+                  <figure className="h-52 ">
+                    <img
+                      className="w-full h-full object-cover rounded-xs"
+                      src={data.imageURL}
+                      alt="Shoes"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">{data.title}</h2>
+                    <p>{data.shortDescription}</p>
+                    <div className="flex gap-2 py-2">
+                      <p className="text-lg">Category-</p>
+                      
+                      <div className="badge badge-soft badge-accent">
+                        {data.category}
+                      </div>
+                    </div>
+                    <div className="flex justify-between py-3   gap-2">
+                      <div className="flex items-center gap-1 border border-gray-300 rounded-md p-2">
+                        <GoHeartFill className=" text-3xl text-primary" />
+                        Likes
+                        <span>{data?.likes.length}</span>
+                      </div>
+                      <div className="flex items-center gap-1 border border-gray-300 rounded-md p-2">
+                        <LiaCommentSolid className=" text-3xl text-primary" />
+                        Comments
+                        <span>{data?.comments.length}</span>
+                      </div>
+                    </div>
+                    <div className="card-actions justify-end">
+                      <Link className="btn btn-primary" href={`/ideas/${data?._id}`}>
+                        View Details
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          })
+        }
       </div>
     </div>
   );

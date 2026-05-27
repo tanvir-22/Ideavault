@@ -4,6 +4,7 @@ import Lottie from "lottie-react";
 import animationData from "../../../public/codework.json";
 import { ListBox, Select } from "@heroui/react";
 import { IoIosSend } from "react-icons/io";
+import { authClient } from "../../lib/auth-client";
 import {
   Button,
   Description,
@@ -16,7 +17,33 @@ import {
   TextField,
 } from "@heroui/react";
 import React from "react";
+import { useState } from "react";
 const AddIdeaPage = () => {
+  const { data: session } = authClient.useSession();
+
+  const [category, setCategory] = useState("");
+  const formHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const postData = Object.fromEntries(formData.entries());
+    postData.category = category;
+    postData.author = session?.user?.id;
+    postData.likes = [];
+    postData.comments = [];
+    const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/createpost`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    });
+    const result = await req.json();
+    if(result.insertedId){
+      alert("Successfully added your idea");
+    }else{
+      alert("something went wrong")
+    }
+  };
   return (
     <>
       <div className="bg-[#0F172A] min-h-screen relative overflow-hidden ">
@@ -55,7 +82,10 @@ const AddIdeaPage = () => {
             </div>
           </div>
           <div className="w-6/12 mx-auto relative z-10 p-6">
-            <Form className="flex w-full flex-col gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg">
+            <Form
+              onSubmit={formHandler}
+              className="flex w-full flex-col gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg"
+            >
               <Fieldset className="w-full">
                 <Fieldset.Legend className="text-white text-xl font-semibold">
                   Create New Idea
@@ -68,7 +98,7 @@ const AddIdeaPage = () => {
                   <div className="grid grid-cols-3 gap-4">
                     <TextField
                       isRequired
-                      name="ideaTitle"
+                      name="title"
                       validate={(value) =>
                         value.length < 10
                           ? "Title must be at least 10 characters"
@@ -107,7 +137,7 @@ const AddIdeaPage = () => {
                       <FieldError />
                     </TextField>
 
-                    <TextField isRequired name="imageUrl">
+                    <TextField isRequired name="imageURL">
                       <Label className="text-white/80">Image URL</Label>
                       <Input
                         className="bg-white/10 border-white/20 text-white placeholder:text-white/30"
@@ -120,7 +150,7 @@ const AddIdeaPage = () => {
                       <FieldError />
                     </TextField>
 
-                    <TextField isRequired name="budget" type="number">
+                    <TextField isRequired name="estimatedBudget" type="number">
                       <Label className="text-white/80">Estimated Budget</Label>
                       <Input
                         className="bg-white/10 border-white/20 text-white placeholder:text-white/30"
@@ -151,6 +181,9 @@ const AddIdeaPage = () => {
                       isRequired
                       className="w-full"
                       placeholder="Select category"
+                      onSelectionChange={(key) => {
+                        setCategory(key);
+                      }}
                     >
                       <Label className="text-white/80">Category</Label>
                       <Select.Trigger className="text-white/80 border-white/20 bg-white/10 w-full">
@@ -225,7 +258,7 @@ const AddIdeaPage = () => {
 
                     <TextField
                       isRequired
-                      name="problemstatement"
+                      name="problemStatement"
                       className="col-span-2"
                     >
                       <Label className="text-white/80">Problem Statement</Label>
@@ -242,7 +275,7 @@ const AddIdeaPage = () => {
 
                     <TextField
                       isRequired
-                      name="solution"
+                      name="proposedSolution"
                       className="col-span-2"
                     >
                       <Label className="text-white/80">Proposed Solution</Label>

@@ -1,32 +1,19 @@
-"use client";
-import React, { useState, useEffect } from "react";
 import { GoHeartFill } from "react-icons/go";
 import { LiaCommentSolid } from "react-icons/lia";
-import { authClient } from "../../lib/auth-client";
-import { Spinner } from "@heroui/react";
-import { redirect } from "next/navigation";
+import { auth } from "../../lib/auth";
+import Link from "next/link";
 import EditIdea from "../../components/EditIdea";
-const myIdeaPage = () => {
-  const { data: session } = authClient.useSession();
+import DeleteIdea from "../../components/DeleteIdea";
+import { headers } from "next/headers";
+const myIdeaPage = async() => {
+  const session = await auth.api.getSession({ headers: await headers() });
   const id = session?.session?.userId;
-  console.log(id);
-  const [userSharedIdeas, setUserSharedIdeas] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    async function loadData() {
-      const req = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/userideas/${id}`,
-      );
-      const res = await req.json();
-      setUserSharedIdeas(res);
-      setLoading(false);
-    }
-    if (id) loadData();
-  }, [id]);
-  console.log(userSharedIdeas);
-  const viewHandler = (id) => {
-    redirect(`${process.env.NEXT_PUBLIC_CLIENT_URI}/ideas/${id}`);
-  };
+      const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userideas/${id}`,{cache: "no-store",},);
+      const userSharedIdeas = await req.json();
+ 
+
+
+
   return (
     <div className="bg-[#0F172A]  relative overflow-hidden  ">
       <div className="absolute top-[-80px] left-[-80px] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[120px]" />
@@ -38,11 +25,7 @@ const myIdeaPage = () => {
       <p className="text-center font-semibold">
         Total shared ideas:{userSharedIdeas.length}
       </p>
-      {loading ? (
-        <div className="flex items-center gap-4 h-screen justify-center">
-          <Spinner />
-        </div>
-      ) : null}
+    
       <div className="grid grid-cols-3 gap-4 p-8 w-10/12 mx-auto">
         {userSharedIdeas.map((data) => {
           return (
@@ -81,16 +64,14 @@ const myIdeaPage = () => {
                     </div>
                   </div>
                   <div className="card-actions flex justify-evenly">
-                    <button
-                      onClick={() => {
-                        viewHandler(data._id);
-                      }}
+                    <Link
+                      href={`/ideas/${data._id}`}
                       className="btn btn-primary"
                     >
                       View
-                    </button>
+                    </Link>
                     <EditIdea post={data} />
-                    <button className="btn bg-red-600">Delete</button>
+                    <DeleteIdea id={data._id} />
                   </div>
                 </div>
               </div>

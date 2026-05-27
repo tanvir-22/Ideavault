@@ -38,7 +38,7 @@ const EditIdea = ({ post }) => {
     if (res.modifiedCount > 0 || res.matchedCount > 0) {
       setIsOpen(false);
       alert("Idea updated successfully!");
-      router.push("/ideas");
+      router.push(`${process.env.NEXT_PUBLIC_CLIENT_URI}/ideas/${post._id}`);
     } else {
       alert("Failed to update idea. Please try again.");
     }

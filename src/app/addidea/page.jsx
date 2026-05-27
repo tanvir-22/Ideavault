@@ -18,7 +18,9 @@ import {
 } from "@heroui/react";
 import React from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 const AddIdeaPage = () => {
+   const router = useRouter();
   const { data: session } = authClient.useSession();
 
   const [category, setCategory] = useState("");
@@ -38,10 +40,11 @@ const AddIdeaPage = () => {
       body: JSON.stringify(postData),
     });
     const result = await req.json();
-    if(result.insertedId){
+    if (result.insertedId) {
       alert("Successfully added your idea");
-    }else{
-      alert("something went wrong")
+      router.push("/myidea");
+    } else {
+      alert("something went wrong");
     }
   };
   return (

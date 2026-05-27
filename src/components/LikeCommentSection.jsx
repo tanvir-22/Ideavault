@@ -8,6 +8,8 @@ import { authClient } from "../lib/auth-client";
 import { useRouter } from "next/navigation";
 
 const LikeCommentSection = ({ res, userData }) => {
+  const [editingId, setEditingId] = useState(null);
+  const [editText, setEditText] = useState("");
   const { data: session } = authClient.useSession();
   console.log(res);
   const userId = session?.session?.userId;
@@ -27,6 +29,33 @@ const LikeCommentSection = ({ res, userData }) => {
       }),
     });
     setComment("");
+    router.refresh();
+  };
+
+  const handleEdit = async (commentId) => {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/comment/${res._id}/edit`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ commentId, text: editText }),
+    });
+    setEditingId(null);
+    setEditText("");
+    router.refresh();
+  };
+
+  const handleDelete = async (commentId) => {
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/comment/${res._id}/delete`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ commentId }),
+      },
+    );
     router.refresh();
   };
   return (
@@ -63,7 +92,6 @@ const LikeCommentSection = ({ res, userData }) => {
 
         <div className="">
           {res?.comments.map((item) => {
-           
             return (
               <div key={item._id} className="flex gap-3 relative">
                 <Avatar>
@@ -72,16 +100,47 @@ const LikeCommentSection = ({ res, userData }) => {
                 </Avatar>
                 <div className="w-full mb-2 bg-white/10 backdrop-blur-lg border-white/10 text-white p-4 rounded-lg">
                   <h1 className="font-bold">{item.author}</h1>
-                  <p className="text-white/70">{item.text}</p>
+                  {editingId === item.commentId ? (
+                    <div className="flex gap-2 mt-2">
+                      <input
+                        value={editText}
+                        onChange={(e) => setEditText(e.target.value)}
+                        className="input bg-white/10 text-white w-full"
+                      />
+                      <button
+                        onClick={() => handleEdit(item.commentId)}
+                        className="btn btn-primary"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setEditingId(null)}
+                        className="btn"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <p className="text-white/70">{item.text}</p>
+                  )}
                   <p className="right-2 top-0 absolute">
                     {new Date(item.createdAt).toLocaleDateString()}
                   </p>
                   {item?.userId == userId && (
                     <div className="flex gap-2 mt-2">
-                      <button className="btn bg-white/10 bg-backdrop border-white/20 text-white">
+                      <button
+                        onClick={() => {
+                          setEditingId(item.commentId);
+                          setEditText(item.text);
+                        }}
+                        className="btn bg-white/10 bg-backdrop border-white/20 text-white"
+                      >
                         Edit
                       </button>
-                      <button className="btn bg-white/10 bg-backdrop border-white/20 text-white">
+                      <button
+                        onClick={() => handleDelete(item.commentId)}
+                        className="btn bg-white/10 bg-backdrop border-white/20 text-white"
+                      >
                         Delete
                       </button>
                     </div>

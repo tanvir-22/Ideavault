@@ -6,11 +6,17 @@ import EditIdea from "../../components/EditIdea";
 import DeleteIdea from "../../components/DeleteIdea";
 import { headers } from "next/headers";
 const myIdeaPage = async () => {
+  const { token } = await auth.api.getToken({ headers: await headers() });
   const session = await auth.api.getSession({ headers: await headers() });
   const id = session?.session?.userId;
   const req = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/userideas/${id}`,
-    { cache: "no-store" },
+    {
+      cache: "no-store",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
   );
   const userSharedIdeas = await req.json();
 
@@ -23,7 +29,7 @@ const myIdeaPage = async () => {
         Your Shared Ideas
       </h1>
       <p className="text-center font-semibold">
-        Total shared ideas:{userSharedIdeas.length}
+        Total shared ideas:{userSharedIdeas.length || 0}
       </p>
       {userSharedIdeas.length > 0 ? (
         <div className="grid grid-cols-3 gap-4 p-8 w-10/12 mx-auto">
@@ -81,7 +87,9 @@ const myIdeaPage = async () => {
         </div>
       ) : (
         <div className="">
-          <h1 className="text-center text-5xl py-10">You have not created any post yet.</h1>
+          <h1 className="text-center text-5xl py-10">
+            You have not created any post yet.
+          </h1>
         </div>
       )}
     </div>

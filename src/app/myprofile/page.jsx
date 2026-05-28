@@ -7,7 +7,6 @@ const Profilepage = () => {
   const router = useRouter();
   const [isedit, setIsEdit] = useState(false);
   const { data: session } = authClient.useSession();
-  console.log(session);
   const [name, setName] = useState(session?.user?.name);
   const [imageURL, setImageURL] = useState(session?.user?.image);
    useEffect(() => {

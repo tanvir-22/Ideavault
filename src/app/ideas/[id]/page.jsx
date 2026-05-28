@@ -5,15 +5,27 @@ import { Avatar } from "@heroui/react";
 
 import LikeCommentSection from "@/components/LikeCommentSection";
 import LikeCommentbtns from "@/components/LikeCommentbtns";
-
+import { auth } from "../../../lib/auth";
+import { headers } from "next/headers";
 const Detailspage = async ({ params }) => {
   const { id } = await params;
-
-  const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ideas/${id}`);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ideas/${id}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
   const res = await req.json();
 
   const userRequest = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/users/${res?.author}`,
+    {
+      headers:{
+        authorization:`Bearer ${token}`
+      }
+    }
   );
   const userData = await userRequest.json();
 

@@ -15,6 +15,8 @@ import {
   TextArea,
   TextField,
 } from "@heroui/react";
+import { authClient } from "../lib/auth-client";
+
 const EditIdea = ({ post }) => {
   const [category, setCategory] = useState(post.category);
   const [isOpen, setIsOpen] = useState(false);
@@ -24,12 +26,15 @@ const EditIdea = ({ post }) => {
     const formData = new FormData(e.target);
     const updatedData = Object.fromEntries(formData.entries());
     updatedData.category = category;
+    const { data: tokenData } = await authClient.token();
+    const token = tokenData?.token;
     const req = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/update/${post._id}`,
       {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(updatedData),
       },

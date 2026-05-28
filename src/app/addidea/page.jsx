@@ -20,12 +20,14 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 const AddIdeaPage = () => {
-   const router = useRouter();
+  const router = useRouter();
   const { data: session } = authClient.useSession();
 
   const [category, setCategory] = useState("");
   const formHandler = async (e) => {
     e.preventDefault();
+    const { data: tokenData } = await authClient.token();
+    const token = tokenData?.token;
     const formData = new FormData(e.target);
     const postData = Object.fromEntries(formData.entries());
     postData.category = category;
@@ -36,6 +38,7 @@ const AddIdeaPage = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(postData),
     });

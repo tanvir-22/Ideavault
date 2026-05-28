@@ -2,7 +2,12 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
-const client = new MongoClient(`${process.env.URI}`);
+const client = new MongoClient(`${process.env.URI}`, {
+  maxPoolSize: 20,
+  tls: true,
+  tlsAllowInvalidCertificates: true,
+});
+await client.connect();
 const db = client.db();
 
 export const auth = betterAuth({

@@ -9,17 +9,16 @@ const myInteractionsPage = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
 
   const userId = session?.session?.userId;
-  console.log(userId);
+ 
   const req_one = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/mycomment/${userId}`,
   );
-  const likedPosts = await req_one.json();
+  const commentedPosts = await req_one.json();
   const req_two = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/mylikes/${userId}`,
   );
-  const commentedPosts = await req_two.json();
-  console.log(likedPosts);
-  console.log(commentedPosts);
+  const likedPosts = await req_two.json();
+
   return (
     <div className="bg-[#0F172A] min-h-screen relative overflow-hidden">
       <div className="absolute top-[-80px] left-[-80px] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[120px]" />

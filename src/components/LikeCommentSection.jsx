@@ -7,7 +7,7 @@ import { Avatar } from "@heroui/react";
 import { authClient } from "../lib/auth-client";
 import { useRouter } from "next/navigation";
 
-const LikeCommentSection = ({ res, userData }) => {
+const LikeCommentSection = ({ res }) => {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
   const { data: session } = authClient.useSession();
@@ -65,14 +65,14 @@ const LikeCommentSection = ({ res, userData }) => {
           <h1 className="flex items-center">
             {" "}
             <FaRegComments className="text-xl mr-2" /> Comments{" "}
-            <span className="ml-2 bg-white/10 backdrop-blur-2xl p-1 rounded-full">
+            <span className="ml-2 bg-white/10 backdrop-blur-2xl px-3 py-1 rounded-full">
               {res.comments.length}
             </span>{" "}
           </h1>
           <div className="flex gap-2 py-2 relative">
             <Avatar>
-              <Avatar.Image alt="John Doe" src={userData.image} />
-              <Avatar.Fallback>{userData.name.charAt(0)}</Avatar.Fallback>
+              <Avatar.Image alt="John Doe" src={session?.user?.image} />
+              <Avatar.Fallback>{session?.user?.name.charAt(0)}</Avatar.Fallback>
             </Avatar>
             <TextArea
               value={comment}
@@ -95,8 +95,10 @@ const LikeCommentSection = ({ res, userData }) => {
             return (
               <div key={item._id} className="flex gap-3 relative">
                 <Avatar>
-                  <Avatar.Image alt="John Doe" src={userData.image} />
-                  <Avatar.Fallback>{userData.name.charAt(0)}</Avatar.Fallback>
+                  <Avatar.Image alt="John Doe" src={session?.user?.image} />
+                  <Avatar.Fallback>
+                    {session?.user?.name.charAt(0)}
+                  </Avatar.Fallback>
                 </Avatar>
                 <div className="w-full mb-2 bg-white/10 backdrop-blur-lg border-white/10 text-white p-4 rounded-lg">
                   <h1 className="font-bold">{item.author}</h1>

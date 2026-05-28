@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 const IdeaPage = () => {
   const [postData, setPostData] = useState([]);
   const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectsort, setSelectsort] = useState(null);
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -19,13 +21,28 @@ const IdeaPage = () => {
     }
     loadData();
   }, []);
-  const filteredPosts = postData.filter((item) => {
-    const query = search.toLowerCase();
-    return (
-      item?.title?.toLowerCase().includes(query) ||
-      item?.category.toLowerCase().includes(query)
-    );
-  });
+  const filteredPosts = postData
+    .filter((item) => {
+      const query = search.toLowerCase();
+      const resultSearch =
+        item?.title?.toLowerCase().includes(query) ||
+        item?.category.toLowerCase().includes(query);
+      const resultCategory = selectedCategory
+        ? item.category == selectedCategory
+        : true;
+      return resultCategory && resultSearch;
+    })
+    .sort((a, b) => {
+      if (selectsort == "Latest") {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      }
+      if (selectsort == "Popular") {
+        return b.likes.length - a.likes.length;
+      }
+      if (selectsort == "Most Commented") {
+        return b.comments.length - a.comments.length;
+      }
+    });
   return (
     <div className="bg-[#0F172A] relative overflow-hidden min-h-screen">
       <div className="absolute top-[-80px] left-[-80px] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[120px]" />
@@ -54,23 +71,27 @@ const IdeaPage = () => {
 
         <Dropdown>
           <Button aria-label="Menu" className="btn btn-primary">
-            Category
+            {selectedCategory || "Category"}
           </Button>
           <Dropdown.Popover>
-            <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
-              <Dropdown.Item id="new-file" textValue="New file">
+            <Dropdown.Menu
+              onAction={(key) =>
+                setSelectedCategory(key === selectedCategory ? null : key)
+              }
+            >
+              <Dropdown.Item id="AI" textValue="AI">
                 <Label>AI</Label>
               </Dropdown.Item>
-              <Dropdown.Item id="copy-link" textValue="Copy link">
+              <Dropdown.Item id="HealthTech" textValue="HealthTech">
                 <Label>HealthTech</Label>
               </Dropdown.Item>
-              <Dropdown.Item id="edit-file" textValue="Edit file">
+              <Dropdown.Item id="EdTech" textValue="EdTech">
                 <Label>EdTech</Label>
               </Dropdown.Item>
-              <Dropdown.Item id="" textValue="Delete file">
+              <Dropdown.Item id="FinTech" textValue="FinTech">
                 <Label>FinTech</Label>
               </Dropdown.Item>
-              <Dropdown.Item id="delete-file" textValue="Delete file">
+              <Dropdown.Item id="E-commerce" textValue="E-commerce">
                 <Label>E-commerce</Label>
               </Dropdown.Item>
             </Dropdown.Menu>
@@ -81,14 +102,16 @@ const IdeaPage = () => {
             Sort
           </Button>
           <Dropdown.Popover>
-            <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
-              <Dropdown.Item id="new-file" textValue="New file">
+            <Dropdown.Menu
+              onAction={(key) => setSelectsort(key === selectsort ? null : key)}
+            >
+              <Dropdown.Item id="Latest" textValue="Latest">
                 <Label>Latest</Label>
               </Dropdown.Item>
-              <Dropdown.Item id="copy-link" textValue="Copy link">
+              <Dropdown.Item id="Popular" textValue="Popular">
                 <Label>Popular</Label>
               </Dropdown.Item>
-              <Dropdown.Item id="edit-file" textValue="Edit file">
+              <Dropdown.Item id="Most Commented" textValue="Most Commented">
                 <Label>Most Commented</Label>
               </Dropdown.Item>
             </Dropdown.Menu>

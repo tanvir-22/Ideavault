@@ -11,7 +11,7 @@ const LikeCommentSection = ({ res }) => {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
   const { data: session } = authClient.useSession();
-  console.log(res);
+
   const userId = session?.session?.userId;
   const router = useRouter();
   const [comment, setComment] = useState("");
@@ -26,6 +26,7 @@ const LikeCommentSection = ({ res }) => {
         userId,
         text: comment,
         author: session?.user?.name,
+        authorImage: session?.user?.image,
       }),
     });
     setComment("");
@@ -92,13 +93,12 @@ const LikeCommentSection = ({ res }) => {
 
         <div className="">
           {res?.comments.map((item) => {
+            console.log(item);
             return (
               <div key={item._id} className="flex gap-3 relative">
                 <Avatar>
-                  <Avatar.Image alt="John Doe" src={session?.user?.image} />
-                  <Avatar.Fallback>
-                    {session?.user?.name.charAt(0)}
-                  </Avatar.Fallback>
+                  <Avatar.Image alt="John Doe" src={item?.authorImage} />
+                  <Avatar.Fallback>{item?.author?.charAt(0)}</Avatar.Fallback>
                 </Avatar>
                 <div className="w-full mb-2 bg-white/10 backdrop-blur-lg border-white/10 text-white p-4 rounded-lg">
                   <h1 className="font-bold">{item.author}</h1>

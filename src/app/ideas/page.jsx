@@ -4,12 +4,14 @@ import { Label, SearchField } from "@heroui/react";
 import { GoHeartFill } from "react-icons/go";
 import { LiaCommentSolid } from "react-icons/lia";
 import Link from "next/link";
+import {Spinner} from "@heroui/react";
 import { useEffect, useState } from "react";
 const IdeaPage = () => {
   const [postData, setPostData] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectsort, setSelectsort] = useState(null);
+  const [loading,setLoading] = useState(true)
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -18,6 +20,7 @@ const IdeaPage = () => {
       const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
       const res = await req.json();
       setPostData(res);
+      setLoading(false)
     }
     loadData();
   }, []);
@@ -119,57 +122,63 @@ const IdeaPage = () => {
         </Dropdown>
       </div>
 
-      <div className="w-10/12 pt-10 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-        {filteredPosts.map((data) => {
-          return (
-            <>
-              <div
-                key={data._id}
-                className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg"
-              >
-                <figure className="h-52 ">
-                  <img
-                    className="w-full h-full object-cover rounded-xs"
-                    src={data.imageURL}
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">{data.title}</h2>
-                  <p>{data.shortDescription}</p>
-                  <div className="flex gap-2 py-2">
-                    <p className="text-lg">Category-</p>
+      {loading ? (
+        <div className="flex items-center justify-center gap-4 h-screen">
+          <Spinner />
+        </div>
+      ) : (
+        <div className="w-10/12 pt-10 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+          {filteredPosts.map((data) => {
+            return (
+              <>
+                <div
+                  key={data._id}
+                  className="card bg-white/10 backdrop-blur-lg  w-92 shadow-lg"
+                >
+                  <figure className="h-52 ">
+                    <img
+                      className="w-full h-full object-cover rounded-xs"
+                      src={data.imageURL}
+                      alt="Shoes"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">{data.title}</h2>
+                    <p>{data.shortDescription}</p>
+                    <div className="flex gap-2 py-2">
+                      <p className="text-lg">Category-</p>
 
-                    <div className="badge badge-soft badge-accent">
-                      {data.category}
+                      <div className="badge badge-soft badge-accent">
+                        {data.category}
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex justify-between py-3   gap-2">
-                    <div className="flex items-center gap-1 border border-gray-300 rounded-md p-2">
-                      <GoHeartFill className=" text-3xl text-primary" />
-                      Likes
-                      <span>{data?.likes.length}</span>
+                    <div className="flex justify-between py-3   gap-2">
+                      <div className="flex items-center gap-1 border border-gray-300 rounded-md p-2">
+                        <GoHeartFill className=" text-3xl text-primary" />
+                        Likes
+                        <span>{data?.likes.length}</span>
+                      </div>
+                      <div className="flex items-center gap-1 border border-gray-300 rounded-md p-2">
+                        <LiaCommentSolid className=" text-3xl text-primary" />
+                        Comments
+                        <span>{data?.comments.length}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1 border border-gray-300 rounded-md p-2">
-                      <LiaCommentSolid className=" text-3xl text-primary" />
-                      Comments
-                      <span>{data?.comments.length}</span>
+                    <div className="card-actions justify-end">
+                      <Link
+                        className="btn btn-primary"
+                        href={`/ideas/${data?._id}`}
+                      >
+                        View Details
+                      </Link>
                     </div>
-                  </div>
-                  <div className="card-actions justify-end">
-                    <Link
-                      className="btn btn-primary"
-                      href={`/ideas/${data?._id}`}
-                    >
-                      View Details
-                    </Link>
                   </div>
                 </div>
-              </div>
-            </>
-          );
-        })}
-      </div>
+              </>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

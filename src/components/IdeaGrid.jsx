@@ -9,7 +9,7 @@ const IdeaGrid = () => {
   return (
     <div className="bg-[#0F172A] py-10">
       <div className="w-10/12 mx-auto py-20 ">
-        <h1 className="text-4xl  text-center ">
+        <h1 className="md:text-4xl text-3xl  text-center ">
           Everything You Need to Grow Your Ideas
         </h1>
         <p className="text-center text-white/70 mt-4">

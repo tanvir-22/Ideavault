@@ -9,7 +9,7 @@ const Navbar = () => {
     <div className="bg-[#0F172A] ">
       <div className="navbar shadow-sm  w-11/12 mx-auto">
         <div className="navbar-start">
-          <div className="dropdown">
+          <div className="dropdown relative">
             <div tabIndex="0" role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow font-semibold"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow font-semibold"
             >
               <li>
                 <Link href="/">Home</Link>
@@ -71,7 +71,7 @@ const Navbar = () => {
         </div>
         {session?.user ? (
           <div className="navbar-end ">
-            <p className="mr-2 font-semibold text-[#7357F5]">
+            <p className="mr-2 font-semibold text-[#7357F5] hidden md:block">
               Welcome {session?.user?.name}!
             </p>
             <div className="dropdown dropdown-end ">

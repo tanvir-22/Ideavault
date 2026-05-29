@@ -57,7 +57,7 @@ const testimonialData = [
 const Testimonial = () => {
   return (
     <div className="bg-[#0F172A] py-10">
-        <h1 className="text-4xl text-center ">Real Feedback From Creative Minds
+        <h1 className="md:text-4xl text-3xl text-center ">Real Feedback From Creative Minds
             </h1>
       <div className="w-10/12 mx-auto py-20 flex gap-10">
       <Marquee speed={70} gradient={false} pauseOnHover={true}>

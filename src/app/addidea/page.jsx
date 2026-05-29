@@ -60,15 +60,15 @@ const AddIdeaPage = () => {
           <h1 className="text-3xl font-bold text-center text-white relative z-10 mb-2">
             Share Your Startup Idea
           </h1>
-          <p className="text-white/80 text-center mb-6 w-1/2 mx-auto">
+          <p className="text-white/80 text-center mb-6 md:w-1/2 mx-auto ">
             Have an innovative startup concept in mind? Publish your idea to
             showcase your vision, receive valuable community feedback, connect
             with potential collaborators, and refine your concept into something
             impactful.
           </p>
         </div>
-        <div className="flex  gap-6 w-11/12 mx-auto relative z-10">
-          <div className="w-6/12 mx-auto relative  p-6">
+        <div className="flex  gap-6 md:w-11/12 mx-auto relative z-10">
+          <div className="md:w-6/12 mx-auto relative  p-6 hidden md:block">
             <Lottie
               animationData={animationData}
               loop={true}
@@ -79,7 +79,7 @@ const AddIdeaPage = () => {
               <h2 className="text-2xl text-center font-bold text-[#7357F5]">
                 Bring Your Idea to Life
               </h2>
-              <p>
+              <p >
                 Share your startup concept with a community of innovators and
                 creators. Explain your vision, inspire others, receive
                 constructive feedback, and discover opportunities to improve and
@@ -87,7 +87,7 @@ const AddIdeaPage = () => {
               </p>
             </div>
           </div>
-          <div className="w-6/12 mx-auto relative z-10 p-6">
+          <div className="md:w-6/12 mx-auto relative z-10 p-6">
             <Form
               onSubmit={formHandler}
               className="flex w-full flex-col gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg"

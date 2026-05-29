@@ -58,7 +58,7 @@ const IdeaPage = () => {
           with creators.
         </p>
       </div>
-      <div className="w-90 mx-auto  flex gap-3  items-center justify-between">
+      <div className="md:w-90 mx-auto  flex flex-col md:flex-row gap-3  items-center justify-between">
         <SearchField name="search">
           <SearchField.Group>
             <SearchField.SearchIcon />
@@ -127,7 +127,7 @@ const IdeaPage = () => {
           <Spinner />
         </div>
       ) : (
-        <div className="w-10/12 pt-10 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+        <div className="md:w-10/12 pt-10 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 place-items-center">
           {filteredPosts.map((data) => {
             return (
               <>

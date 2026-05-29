@@ -9,7 +9,7 @@ const myInteractionsPage = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
 
   const userId = session?.session?.userId;
- 
+
   const req_one = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/mycomment/${userId}`,
   );
@@ -31,7 +31,7 @@ const myInteractionsPage = async () => {
 
         {/* LIKED POSTS */}
         <div className="mb-10">
-          <h2 className="text-xl font-semibold text-white flex items-center gap-2 mb-4">
+          <h2 className="text-xl font-semibold text-white flex  items-center gap-2 mb-4">
             <GoHeartFill className="text-primary" /> Liked Posts
             <span className="bg-white/10 px-2 py-0.5 rounded-full text-sm">
               {likedPosts.length}
@@ -45,9 +45,9 @@ const myInteractionsPage = async () => {
               {likedPosts.map((post) => (
                 <div
                   key={post._id}
-                  className=" bg-white/10 backdrop-blur-lg shadow-lg p-5 flex items-center"
+                  className=" bg-white/10 backdrop-blur-lg shadow-lg p-5 flex flex-col md:flex-row rounded-md   md:items-center"
                 >
-                  <figure className="h-35 w-40">
+                  <figure className="w-80 h-30 md:h-35 md:w-40">
                     <img
                       src={post.imageURL}
                       alt={post.title}
@@ -55,8 +55,10 @@ const myInteractionsPage = async () => {
                     />
                   </figure>
                   <div className="card-body">
-                    <h3 className="card-title text-white">{post.title}</h3>
-                    <p className="text-white/60 text-sm">
+                    <h3 className="card-title text-white text-xs md:text-xl">
+                      {post.title}
+                    </h3>
+                    <p className="text-white/60 md:text-sm text-[12px]">
                       {post.shortDescription}
                     </p>
                     <div className="badge badge-soft badge-accent">
@@ -92,7 +94,6 @@ const myInteractionsPage = async () => {
           ) : (
             <div className="flex flex-col gap-4">
               {commentedPosts.map((post) => {
-                
                 const myComments = post.comments.filter(
                   (c) => c.userId === userId,
                 );

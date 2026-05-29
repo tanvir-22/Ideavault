@@ -35,7 +35,7 @@ const SignupPage = () => {
       </h1>
       <Form
         onSubmit={onSubmitHandler}
-        className="flex w-120 p-18  flex-col gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg "
+        className="flex w-100 md:w-120 p-18  flex-col gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg "
       >
         <TextField
           isRequired

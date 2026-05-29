@@ -35,8 +35,8 @@ const Detailspage = async ({ params }) => {
       <div className="absolute bottom-[-60px] right-[-60px] w-[350px] h-[350px] bg-blue-500/30 rounded-full blur-[120px]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-cyan-400/20 rounded-full blur-[100px]" />
 
-      <div className="w-10/12 mx-auto flex justify-around items-center p-8 gap-8">
-        <div className="w-1/2">
+      <div className="md:w-10/12 mx-auto flex flex-col md:flex-row justify-around items-center p-8 gap-8">
+        <div className="md:w-1/2">
           <Image
             src={res.imageURL}
             alt={res.title}
@@ -45,7 +45,7 @@ const Detailspage = async ({ params }) => {
             className="rounded-lg shadow-lg"
           ></Image>
         </div>
-        <div className="w-1/2 bg-white/10 backdrop-blur-lg p-10 rounded-lg shadow-lg">
+        <div className=" md:w-1/2 bg-white/10 backdrop-blur-lg p-10 rounded-lg shadow-lg">
           <h1 className="text-3xl font-bold text-white mb-4">{res.title}</h1>
           <p className="text-white mb-2">{res.shortDescription}</p>
           <p className="text-white mb-4">{res.detailedDescription}</p>

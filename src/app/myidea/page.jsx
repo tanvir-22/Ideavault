@@ -32,7 +32,7 @@ const myIdeaPage = async () => {
         Total shared ideas:{userSharedIdeas.length || 0}
       </p>
       {userSharedIdeas.length > 0 ? (
-        <div className="grid grid-cols-3 gap-4 p-8 w-10/12 mx-auto">
+        <div className="grid place-items-center md:grid-cols-3 grid-cols-1 gap-4 p-8 md:w-10/12 mx-auto">
           {userSharedIdeas.map((data) => {
             return (
               <>

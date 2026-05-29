@@ -13,7 +13,7 @@ import Marquee from "react-fast-marquee";
 const Logos = () => {
   return (
     <div className="bg-[#0F172A]">
-      <h1 className=" text-4xl  text-center py-8">Inspired by Great Ideas</h1>
+      <h1 className=" md:text-4xl text-3xl  text-center py-8">Inspired by Great Ideas</h1>
       <div className="w-10/12 mx-auto  ">
         <Marquee speed={70} gradient={false} pauseOnHover={true}>
           <Image

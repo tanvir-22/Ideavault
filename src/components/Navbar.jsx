@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { authClient } from "../lib/auth-client";
-
+import "animate.css";
 const Navbar = () => {
   const { data: session, isPending, error } = authClient.useSession();
 
   return (
     <div className="bg-[#0F172A] ">
-      <div className="navbar shadow-sm  w-11/12 mx-auto">
+      <div className="navbar shadow-sm  w-11/12 mx-auto animate__animated animate__backInRight">
         <div className="navbar-start">
           <div className="dropdown relative">
             <div tabIndex="0" role="button" className="btn btn-ghost lg:hidden">

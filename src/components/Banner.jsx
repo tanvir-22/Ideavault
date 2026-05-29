@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
+import "animate.css";
 import Lottie from "lottie-react";
 import animationData from "../../public/Business Analytics.json";
 const Banner = () => {
   return (
     <div className="bg-[#0F172A] border-t">
-      <div className="flex flex-col md:flex-row md:w-10/12 mx-auto p-10 gap-10 justify-between items-center ">
+      <div className="animate__animated animate__backInRight flex flex-col md:flex-row md:w-10/12 mx-auto p-10 gap-10 justify-between items-center ">
         <div className="md:w-1/2  space-y-7">
           <h1 className="text-3xl text-center md:text-left md:text-5xl font-bold text-white">
             Turn Bold Ideas Into <br />{" "}

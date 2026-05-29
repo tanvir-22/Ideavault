@@ -7,11 +7,13 @@ import LikeCommentSection from "@/components/LikeCommentSection";
 import LikeCommentbtns from "@/components/LikeCommentbtns";
 import { auth } from "../../../lib/auth";
 import { headers } from "next/headers";
+import ToastHandlerEditPage from "@/components/ToastHandlerEditPage";
 const Detailspage = async ({ params }) => {
   const { id } = await params;
   const { token } = await auth.api.getToken({
     headers: await headers(),
   });
+
   const req = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ideas/${id}`, {
     headers: {
       authorization: `Bearer ${token}`,
@@ -22,19 +24,19 @@ const Detailspage = async ({ params }) => {
   const userRequest = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/users/${res?.author}`,
     {
-      headers:{
-        authorization:`Bearer ${token}`
-      }
-    }
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
   );
   const userData = await userRequest.json();
 
   return (
     <div className="bg-[#0F172A]  relative overflow-hidden  ">
+      <ToastHandlerEditPage />
       <div className="absolute top-[-80px] left-[-80px] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-60px] right-[-60px] w-[350px] h-[350px] bg-blue-500/30 rounded-full blur-[120px]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-cyan-400/20 rounded-full blur-[100px]" />
-
       <div className="md:w-10/12 mx-auto flex flex-col md:flex-row justify-around items-center p-8 gap-8">
         <div className="md:w-1/2">
           <Image
@@ -107,7 +109,6 @@ const Detailspage = async ({ params }) => {
           <LikeCommentbtns res={res}></LikeCommentbtns>
         </div>
       </div>
-
       <LikeCommentSection res={res} userData={userData} />
     </div>
   );

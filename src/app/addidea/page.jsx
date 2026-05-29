@@ -5,6 +5,7 @@ import animationData from "../../../public/codework.json";
 import { ListBox, Select } from "@heroui/react";
 import { IoIosSend } from "react-icons/io";
 import { authClient } from "../../lib/auth-client";
+
 import {
   Button,
   Description,
@@ -19,6 +20,8 @@ import {
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { error } from "better-auth/api";
+import toast, { Toaster } from "react-hot-toast";
 const AddIdeaPage = () => {
   const router = useRouter();
   const { data: session } = authClient.useSession();
@@ -44,15 +47,18 @@ const AddIdeaPage = () => {
     });
     const result = await req.json();
     if (result.insertedId) {
-      alert("Successfully added your idea");
-      router.push("/myidea");
+      toast.success("New Idea Added");
+      e.target.reset(); 
+      setCategory(""); 
+
     } else {
-      alert("something went wrong");
+      toast.error("something went wrong");
     }
   };
   return (
     <>
       <div className="bg-[#0F172A] min-h-screen relative overflow-hidden ">
+        <Toaster />
         <div className="absolute top-[-80px] left-[-80px] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-60px] right-[-60px] w-[350px] h-[350px] bg-blue-500/30 rounded-full blur-[120px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-cyan-400/20 rounded-full blur-[100px]" />
@@ -79,7 +85,7 @@ const AddIdeaPage = () => {
               <h2 className="text-2xl text-center font-bold text-[#7357F5]">
                 Bring Your Idea to Life
               </h2>
-              <p >
+              <p>
                 Share your startup concept with a community of innovators and
                 creators. Explain your vision, inspire others, receive
                 constructive feedback, and discover opportunities to improve and

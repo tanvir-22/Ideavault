@@ -5,6 +5,8 @@ import Link from "next/link";
 import EditIdea from "../../components/EditIdea";
 import DeleteIdea from "../../components/DeleteIdea";
 import { headers } from "next/headers";
+
+
 const myIdeaPage = async () => {
   const { token } = await auth.api.getToken({ headers: await headers() });
   const session = await auth.api.getSession({ headers: await headers() });
@@ -22,6 +24,7 @@ const myIdeaPage = async () => {
 
   return (
     <div className="bg-[#0F172A] min-h-screen  relative overflow-hidden  ">
+      
       <div className="absolute top-[-80px] left-[-80px] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-60px] right-[-60px] w-[350px] h-[350px] bg-blue-500/30 rounded-full blur-[120px]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-cyan-400/20 rounded-full blur-[100px]" />

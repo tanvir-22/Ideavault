@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 💡 IDEAVAULT
 
-## Getting Started
+Got a million-dollar idea but nowhere to share it? IdeaVault is the platform for you. Whether you're a solo founder looking for validation, a developer hunting for your next project, or just someone who loves innovation — IdeaVault brings ideas and people together.
+Browse trending concepts, post your own startup vision, engage through community discussions, and watch great ideas evolve through collective intelligence.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🔐 **Secure Authentication** — Email/password login plus Google OAuth for quick access, protected with JWT tokens for ironclad session security
+- 💡 **Idea Submission** — Post detailed startup ideas with category, tags, budget estimates, target audience, problem statements, and proposed solutions
+- 📈 ** Ideas Feed** — Discover the hottest startup concepts surfaced by community activity and engagement metrics
+- 🔍 **Smart Search & Filter** — Find ideas instantly by title (case-insensitive) or filter by category and date range to zero in on what matters
+- 💬 **Comment & Discuss** — Engage with any idea through a full comment system — add, edit, or delete your own comments with timestamped history
+- 📁 **Personal interaction** — Manage all your submitted ideas and track every interaction (comments, bookmarks) from a private, personalized hub
+- 👤 Profile Management — Manage your profile
+- 📱 **Fully Responsive** — Perfect layouts across mobile & desktop — no pinching required
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ Technologies Used
 
-## Learn More
+| Technology | Purpose |
+|---|---|
+| ⚡ Next.js | Full-stack framework & routing |
+| 🎨 Tailwind CSS | Utility-first styling |
+| 🌼 DaisyUI | Pre-built component library & theming |
+| 🧩 HeroUI | Modern UI components |
+| 🔐 Better Auth | Authentication & session management |
+| 🍃 MongoDB | Database for users, listings & orders |
+| 🔐 **JWT** | Stateless authentication & route protection |
+| 🌐 **Node.js + Express** | RESTful backend API |
+| ☁️ **Vercel** | Deployment & hosting |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📸 Preview
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![App Preview](/public/preview.png)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
